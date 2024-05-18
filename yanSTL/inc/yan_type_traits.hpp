@@ -116,6 +116,11 @@ template <typename T>           struct remove_extent<T[]>  { using type = T; };
 template <typename T, size_t N> struct remove_extent<T[N]> { using type = T; };
 template <typename T> using remove_extent_t = typename remove_extent<T>::type;
 
+// 当 B == true 时返回 T，否则返回 F。
+template <bool B, typename, typename F> struct conditional             { using type = F; };
+template <typename T, typename F>       struct conditional<true, T, F> { using type = T; };
+template <bool B, typename T, typename F> using conditional_t = conditional<B, T, F>::type;
+
 // 返回T的退化类型。
 template <typename T>                           struct decay       { using type = remove_cv_t<T>; };
 template <typename T>                           struct decay<T&>   { using type = typename decay<T>::type; };
