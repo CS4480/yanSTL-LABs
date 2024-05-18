@@ -116,7 +116,6 @@ template <typename T>           struct remove_extent<T[]>  { using type = T; };
 template <typename T, size_t N> struct remove_extent<T[N]> { using type = T; };
 template <typename T> using remove_extent_t = typename remove_extent<T>::type;
 
-std::decay<int>;
 // 返回T的退化类型。
 template <typename T>                           struct decay       { using type = remove_cv_t<T>; };
 template <typename T>                           struct decay<T&>   { using type = typename decay<T>::type; };
